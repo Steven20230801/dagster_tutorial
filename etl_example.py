@@ -10,6 +10,8 @@ def extract():
 
 def transform(data):
     data['date'] = pd.to_datetime(data['date'])
+    # add a new column year
+    data['year'] = data['date'].dt.year
     return data
 
 def load(data) -> None:
