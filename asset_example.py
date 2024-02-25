@@ -19,9 +19,9 @@ def loaded_data(transformed_data: pd.DataFrame) -> None:
 # Addition: define all assets
 all_assets = [extract_data, transformed_data, loaded_data]  
 # Addition: define a job that will materialize the assets
-hackernews_job = define_asset_job("etl_example_job", selection=AssetSelection.all())
+etl1_job = define_asset_job("etl_example_job", selection=AssetSelection.all())
 
 defs = Definitions(
     assets=all_assets,
-    jobs=[hackernews_job],  # Addition: add the job to Definitions object (see below)
+    jobs=[etl1_job],  # Addition: add the job to Definitions object (see below)
 )

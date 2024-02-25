@@ -1,0 +1,6 @@
+load_from:
+  - python_file: 
+      relative_path: "asset_example.py"
+  - python_file: 
+      relative_path: "sensor_invoke_after_etl.py"
+# workspace.yaml
