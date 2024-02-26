@@ -15,7 +15,7 @@ dagster dev -f asset_example.py
 This is a [Dagster](https://dagster.io/) project made to be used alongside the official [Dagster tutorial](https://docs.dagster.io/tutorial).
 
 # Windows設立環境變數
-setx DAGSTER_HOME "C:\Users\Steven\Documents\Python\Dagster" /M
+setx DAGSTER_HOME "C:\Users\data-taipei\Documents\dagster_tutorial" /M
 Write-Host $env:DAGSTER_HOME # Power-shell
 
 echo %DAGSTER_HOME%
