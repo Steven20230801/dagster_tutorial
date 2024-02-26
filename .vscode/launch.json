@@ -1,0 +1,18 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Run Python Script",
+            "type": "python",
+            "request": "launch",
+            "module": "dagster",
+            "justMyCode": true,
+            "args": [
+                "dev"
+            ],
+            "env": {
+                "PYTHONPATH": "${workspaceFolder}"
+            }
+        }
+    ]
+}
