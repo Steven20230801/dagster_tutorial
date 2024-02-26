@@ -1,8 +1,8 @@
 load_from:
   - python_file: 
-      relative_path: "asset_example.py"
+      relative_path: "jobs/etl_job.py"
   - python_file: 
-      relative_path: "asset_example2.py"
+      relative_path: "jobs/etl2_job.py"
   - python_file: 
-      relative_path: "sensor_invoke_after_etl.py"
+      relative_path: "sensors/etl2_sensor.py"
 # workspace.yaml

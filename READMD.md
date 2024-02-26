@@ -1,10 +1,10 @@
 # 使用專案內的python建立job 
-- etl_example.py : python檔案
-- asset_example.py : dagster call etl_example.py 的設定檔案
+- etl1.py : python檔案
+- etl_job.py : dagster call etl1.py 的設定檔案
 執行: 
 ```
 venv\scripts\activate  
-dagster dev -f asset_example.py 
+dagster dev -f etl_job.py 
 ```
 
 # 使用cmd call 專案內的python建立Job

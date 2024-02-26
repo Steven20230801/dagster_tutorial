@@ -15,7 +15,7 @@ def transform(data):
     return data
 
 def load(data) -> None:
-    data.to_csv('output.csv', index=False)
+    data.to_csv('output/output.csv', index=False)
 
 def etl():
     data = extract()

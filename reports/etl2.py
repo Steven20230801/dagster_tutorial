@@ -2,7 +2,7 @@ import time
 import pandas as pd
 
 
-def extract(path="output.csv"):
+def extract(path="output/output.csv"):
     df = pd.read_csv(path, parse_dates=["date"])
     return df
 
@@ -13,9 +13,7 @@ def transform(data):
 
 
 def load(data) -> None:
-    print("sleeping for 10 seconds from load")
-    time.sleep(2)
-    data.to_csv("output2.csv", index=False)
+    data.to_csv("output/output2.csv", index=False)
 
 
 def etl():

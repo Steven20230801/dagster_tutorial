@@ -1,13 +1,51 @@
-# from sensor_invoke_after_etl import etl2_job
-# from dagster import AssetSelection, Definitions, RunsFilter, SensorEvaluationContext, asset, define_asset_job, sensor, RunRequest
+import time
+from reports.etl2 import etl, extract, transform, load
+from dagster import (
+    AssetKey,
+    AssetSelection,
+    Definitions,
+    RunsFilter,
+    SensorEvaluationContext,
+    asset,
+    asset_sensor,
+    define_asset_job,
+    job,
+    repository,
+    sensor,
+    RunRequest,
+    DagsterRunStatus,
+)
+from jobs.etl2_job import (
+    etl2_job,
+    extract,
+    transform,
+    load,
+    etl,
+    etl2_extract_data,
+    etl2_transformed_data,
+    etl2_loaded_data,
+)
 
-# @sensor(job=etl2_job)
-# def etl2_sensor(context: SensorEvaluationContext):
-#     run_records = context.instance.get_run_records(
-#         filters= RunsFilter(
-#             job_name="etl1_job",
-#             statuses=["SUCCESS"],
-#         )
-#     )
-#     if run_records:
-#         yield RunRequest(run_key="etl2_sensor", run_config={})
+
+@job
+def sensor_job():
+    time.sleep(10)
+    etl()
+
+
+@sensor(job=sensor_job, minimum_interval_seconds=300)
+def etl2_sensor(context: SensorEvaluationContext):
+    monitored_jobs = "etl1_job"
+    run_records = context.instance.get_run_records(
+        filters=RunsFilter(
+            job_name=monitored_jobs,
+            statuses=[DagsterRunStatus.SUCCESS],
+        )
+    )
+    if run_records:
+        yield RunRequest(run_key=None, run_config={})
+
+
+@repository
+def my_repository():
+    return [sensor_job, etl2_sensor]
