@@ -5,4 +5,6 @@ load_from:
       relative_path: "jobs/etl2_job.py"
   - python_file: 
       relative_path: "sensors/etl2_sensor.py"
+  - python_file: 
+      relative_path: "jobs/call_cmd.py"
 # workspace.yaml
