@@ -13,6 +13,7 @@ from dagster import (
     AssetIn,
     In,
     asset,
+    graph,
     job,
     op,
     multi_asset,
@@ -26,7 +27,7 @@ from dagster import (
 )
 
 
-@op(out=AssetIn("extracted_data", asset_key="extracted_data"))
+@op(ins={"search_date": In(date), "report_config": In(dict)})
 def extract_data(search_date: date, report_config: dict) -> pd.DataFrame:
     return extract(search_date, report_config)
 
@@ -41,7 +42,7 @@ def load_data(data: pd.DataFrame) -> None:
     load(data)
 
 
-@job
+@asset
 def main():
     search_date = date.today()
     report_config = {}
@@ -50,7 +51,8 @@ def main():
     load_data(data)
 
 
-# job = define_asset_job("test")
-# schedule = ScheduleDefinition(job=job, cron_schedule="00 14 * * 1-5", execution_timezone="Asia/Singapore")
-# io_manager = FilesystemIOManager(base_dir=r"reports\steven_workspace\ftt\ftt_temp")
-# definition = Definitions(assets=[extract_data, transform_data], schedules=[schedule], resources={"io_manager": io_manager})
+job = define_asset_job("main_etl3_with_op")
+schedule = ScheduleDefinition(
+    job=job, cron_schedule="00 14 * * 1-5", execution_timezone="Asia/Singapore"
+)
+definition = Definitions(assets=[main], schedules=[schedule])

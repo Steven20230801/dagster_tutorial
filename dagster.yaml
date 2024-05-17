@@ -1,8 +1,12 @@
 # Define the storage configuration for your pipeline
 storage:
-  sqlite:
-    base_dir: /path/to/storage
-
+  mysql:
+    mysql_db:
+      username: root
+      password: root
+      hostname: 127.0.0.1
+      db_name: demoreport
+      port: 3306
 
 
 
